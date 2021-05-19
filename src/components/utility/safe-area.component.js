@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 
 
-export const SafeArea = styled(SafeAreaView)`
+export const SafeAreaComponent = styled(SafeAreaView)`
   flex:1;
   ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};background-color: blue;
 `;
