@@ -13,6 +13,7 @@ import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {Ionicons} from '@expo/vector-icons';
+import {RestaurantContextProvider} from './src/services/restaurants/restaurants.context';
 // const isAndroid = Platform.OS === 'android';
 
 
@@ -56,6 +57,7 @@ const Tab = createBottomTabNavigator();
     <>
    
       <ThemeProvider theme={theme}>
+        <RestaurantContextProvider>
       <NavigationContainer>
       <Tab.Navigator 
               screenOptions= {createScreenOptions}
@@ -70,6 +72,7 @@ const Tab = createBottomTabNavigator();
         
       </Tab.Navigator>
       </NavigationContainer>
+      </RestaurantContextProvider>
       </ThemeProvider>
 
       <ExpoStatusBar style="auto" />
