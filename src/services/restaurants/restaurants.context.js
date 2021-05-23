@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 //Doing the request for us and exporting the data globally
 import React, { useState, createContext, useEffect, useMemo } from "react";
-import { restaurantRequest, restaurantsTransform } from "./restaurants.service";
+import { restaurantsRequest, restaurantsTransform } from "./restaurants.service";
 
 export const RestaurantsContext = createContext();
 
@@ -12,7 +13,7 @@ export const RestaurantContextProvider = ({ children }) => {
   const retrieveRestaurants = () => {
     setIsLoading(true);
     setTimeout(() => {
-      restaurantRequest()
+      restaurantsRequest()
         .then(restaurantsTransform)
         .then((results) => {
           setIsLoading(false);
