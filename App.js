@@ -9,6 +9,7 @@ import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
+import {locationContextProvider} from './src/services/location/location.context';
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -57,6 +58,7 @@ const Tab = createBottomTabNavigator();
     <>
    
       <ThemeProvider theme={theme}>
+        <locationContextProvider >
         <RestaurantContextProvider>
       <NavigationContainer>
       <Tab.Navigator 
@@ -73,6 +75,7 @@ const Tab = createBottomTabNavigator();
       </Tab.Navigator>
       </NavigationContainer>
       </RestaurantContextProvider>
+      </locationContextProvider>
       </ThemeProvider>
 
       <ExpoStatusBar style="auto" />
