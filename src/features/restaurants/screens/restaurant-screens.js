@@ -1,7 +1,7 @@
 //restaurant main page
 
 import React, { useContext } from "react";
-import { View, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import styled from "styled-components";
 import { SafeAreaComponent } from "../../../components/utility/safe-area.component";
@@ -32,7 +32,7 @@ export const RestaurantScreen = () => {
     <SafeAreaComponent>
       {isLoading && (
         <LoadingContainer>
-          <Loading size={50} animating={true} color={Colors.red800} />
+          <Loading size={50} animating={true} color={Colors.blue300} />
         </LoadingContainer>
       )}
       <Search />

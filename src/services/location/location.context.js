@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { locationRequest, locationTransform } from "./location.service";
 
-export const locationContext = React.createContext();
+export const LocationContext = React.createContext();
 
 export const LocationContextProvider = ({ children }) => {
   const [location, setLocation] = useState(null);
@@ -11,14 +11,18 @@ export const LocationContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const onSearch = (searchKeyword = "Antwerp") => {
+  const onSearch = (searchKeyword) => {
     setIsLoading(true);
     setKeyword(searchKeyword);
-    if (!searchKeyword.length) {
+    
+  };
+
+  useEffect(() =>{
+    if (!keyword.length) {
       //dont do anything
       return;
     }
-    locationRequest(searchKeyword.toLowerCase())
+    locationRequest(keyword.toLowerCase())
       .then(locationTransform)
       //once finished, run
       .then((result) => {
@@ -32,10 +36,10 @@ export const LocationContextProvider = ({ children }) => {
         setError(err);
         console.log(err);
       });
-  };
+  },[keyword])
 
   return (
-    <locationContext.Provider
+    <LocationContext.Provider
       value={{
         isLoading,
         error,
@@ -45,6 +49,6 @@ export const LocationContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </locationContext.Provider>
+    </LocationContext.Provider>
   );
 };
