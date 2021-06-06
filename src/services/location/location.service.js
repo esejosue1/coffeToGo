@@ -1,3 +1,5 @@
+//obtaining and changing the restaurants locations
+
 import camelize from "camelize";
 import { locations } from "./location.mock";
 
@@ -18,5 +20,5 @@ export const locationTransform = (result) => {
   const { geometry = {} } = camelize(result.results)[0];
   const { lat, lng } = geometry.location;
 
-  return { lat, lng };
+  return { lat, lng, viewport: geometry.viewport };
 };
