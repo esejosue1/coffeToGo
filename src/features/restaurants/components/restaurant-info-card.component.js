@@ -6,6 +6,8 @@ import { Text } from "../../../components/typography/text.component";
 import star from "../../../../assets/star";
 import openIcon from "../../../../assets/open";
 import { Spacer } from "../../../components/spacer/spacer.component";
+import { Favourite } from "../../../components/favourites/favourites.component";
+import { View } from "react-native";
 import {
   Icon,
   RestaurantCard,
@@ -37,17 +39,20 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
 
   return (
     <RestaurantCard elevation={5}>
-      <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
+      <View>
+        <Favourite />
+        <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
+      </View>
       <Info>
         <Text variant="label">{name}</Text>
         <Section>
           <Rating>
-            {ratingArray.map((_,index) => (
-              <SvgXml 
-              key={`star-${placeId}-${index}`}
-              xml={star} 
-              width={20} 
-              height={20} 
+            {ratingArray.map((_, index) => (
+              <SvgXml
+                key={`star-${placeId}-${index}`}
+                xml={star}
+                width={20}
+                height={20}
               />
             ))}
           </Rating>

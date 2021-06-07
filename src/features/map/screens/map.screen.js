@@ -4,7 +4,7 @@ import React, { useContext, useState, useEffect } from "react";
 import MapView from "react-native-maps";
 import styled from "styled-components/native";
 import { Search } from "../components/searchMap.component";
-
+import { MapCallout } from "../components/map-callout.component";
 import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 const Map = styled(MapView)`
@@ -12,7 +12,8 @@ const Map = styled(MapView)`
   width: 100%;
 `;
 
-export const MapScreen = () => {
+//navigation props is given bc of a view in app nav
+export const MapScreen = ({ navigation }) => {
   const { location } = useContext(LocationContext);
   const { restaurants = [] } = useContext(RestaurantsContext);
   //var that will determine what zoom level to start with in maps
@@ -37,7 +38,26 @@ export const MapScreen = () => {
         }}
       >
         {restaurants.map((eachRestaurant) => {
-          return null;
+          return (
+            <MapView.Marker
+              key={eachRestaurant.name}
+              title={eachRestaurant.name}
+              coordinate={{
+                latitude: eachRestaurant.geometry.location.lat,
+                longitude: eachRestaurant.geometry.location.lng,
+              }}
+            >
+              <MapView.Callout
+                onPress={() =>
+                  navigation.navigate("RestaurantDetail", {
+                    eachRestaurant,
+                  })
+                }
+              >
+                <MapCallout restaurant={eachRestaurant} />
+              </MapView.Callout>
+            </MapView.Marker>
+          );
         })}
       </Map>
     </>

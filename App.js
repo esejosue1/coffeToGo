@@ -10,6 +10,7 @@ import { LocationContextProvider } from "./src/services/location/location.contex
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { Navigation } from "./src/insfrastructure/navigation/index";
 import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
+import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
 // const isAndroid = Platform.OS === 'android';
 
 export default function App() {
@@ -27,11 +28,13 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <LocationContextProvider>
-          <RestaurantContextProvider>
-            <Navigation />
-          </RestaurantContextProvider>
-        </LocationContextProvider>
+        <FavouritesContextProvider>
+          <LocationContextProvider>
+            <RestaurantContextProvider>
+              <Navigation />
+            </RestaurantContextProvider>
+          </LocationContextProvider>
+        </FavouritesContextProvider>
       </ThemeProvider>
 
       <ExpoStatusBar style="auto" />
