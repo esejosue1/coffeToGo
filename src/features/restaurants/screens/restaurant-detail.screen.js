@@ -1,4 +1,4 @@
-//Detail page for each restaurant
+//Detail page for each restaurant like what a resraurant haves
 
 import React, { useState } from "react";
 import { List } from "react-native-paper";
@@ -13,10 +13,10 @@ export const RestaurantDetailScreen = ({ route }) => {
   const [lunchExpanded, setLunchExpanded] = useState(false);
   const [dinnerExpanded, setDinnerExpanded] = useState(false);
   const [drinksExpanded, setDrinksExpanded] = useState(false);
-  const { restaurantProps } = route.params;
+  const { restaurant } = route.params;
   return (
     <SafeAreaComponent>
-      <RestaurantInfoCard restaurant={restaurantProps} />
+      <RestaurantInfoCard restaurant={restaurant} />
       <ScrollView>
         <List.Accordion
           title="Breakfast"

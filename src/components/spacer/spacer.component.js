@@ -1,7 +1,6 @@
 //Creting space to be used along the App
 
 import React from "react";
-import { View } from "react-native";
 import styled, { useTheme } from "styled-components/native";
 
 const sizeVariant = {
@@ -13,17 +12,18 @@ const sizeVariant = {
 const positionVariant = {
   top: "marginTop",
   left: "marginLeft",
-  bottom: "marginBottom",
   right: "marginRight",
+  bottom: "marginBottom",
 };
 
 const getVariant = (position, size, theme) => {
   const sizeIndex = sizeVariant[size];
   const property = positionVariant[position];
   const value = theme.space[sizeIndex];
-  return `${property}: ${value}`;
+
+  return `${property}:${value}`;
 };
-//as
+
 const SpacerView = styled.View`
   ${({ variant }) => variant};
 `;
@@ -34,7 +34,7 @@ export const Spacer = ({ position, size, children }) => {
   return <SpacerView variant={variant}>{children}</SpacerView>;
 };
 
-Spacer.defaulProps = {
+Spacer.defaultProps = {
   position: "top",
   size: "small",
 };

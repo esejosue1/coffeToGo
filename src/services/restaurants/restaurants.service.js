@@ -3,6 +3,7 @@
 import { mockImages, mocks } from "./mock";
 import camelize from "camelize";
 
+//checking if the restaurant exists in the mocks
 export const restaurantsRequest = (location) => {
   return new Promise((resolve, reject) => {
     const mock = mocks[location];
@@ -12,6 +13,7 @@ export const restaurantsRequest = (location) => {
     resolve(mock);
   });
 };
+
 //camelize json to prevent data misflow
 export const restaurantsTransform = ({ results = [] }) => {
   //map will itirate over every restaurant
@@ -23,22 +25,10 @@ export const restaurantsTransform = ({ results = [] }) => {
     return {
       ...restaurant,
       address: restaurant.vicinity,
-      isOpenNow:
-        restaurant.opening_hourse &&
-        restaurant.opening_hourse.opening_hours.open_now,
+      isOpenNow: restaurant.opening_hours && restaurant.opening_hours.open_now,
       isClosedTemporarily: restaurant.business_status === "CLOSED_TEMPORARILY",
     };
   });
 
   return camelize(mappedResults);
 };
-
-// //.then is applied when we are expecting something in the future. promise .then
-// restaurantRequest()
-// .then(restaurantTrannsform)
-// .then((transformedResponse) =>{
-//     console.log(transformedResponse)
-// })
-// .catch((error) =>{
-//     console.log(error)
-// })

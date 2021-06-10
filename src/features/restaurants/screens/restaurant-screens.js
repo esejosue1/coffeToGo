@@ -1,15 +1,17 @@
 //restaurant main page
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FlatList, TouchableOpacity } from "react-native";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import styled from "styled-components";
 import { SafeAreaComponent } from "../../../components/utility/safe-area.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
-import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import { Search } from "../components/search.component";
+import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
+import { Text } from "react-native";
+import { FavouritesContext } from "../../../services/favourites/favourites.context";
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
@@ -30,6 +32,7 @@ const LoadingContainer = styled.View`
 export const RestaurantScreen = ({ navigation }) => {
   const { isLoading, restaurants } = useContext(RestaurantsContext);
   const { favourites } = useContext(FavouritesContext);
+  const [isToggled, setIsToggled] = useState(false);
   return (
     <SafeAreaComponent>
       {isLoading && (
@@ -37,8 +40,17 @@ export const RestaurantScreen = ({ navigation }) => {
           <Loading size={50} animating={true} color={Colors.blue300} />
         </LoadingContainer>
       )}
-      <Search />
+      <Search
+        isFavouritesToggled={isToggled}
+        onFavouritesToggled={() => setIsToggled(!isToggled)}
+      />
 
+      {isToggled && (
+        <FavouritesBar
+          favourites={favourites}
+          onNavigate={navigation.navigate}
+        />
+      )}
       <RestaurantList
         data={restaurants}
         renderItem={({ item }) => {
@@ -47,7 +59,7 @@ export const RestaurantScreen = ({ navigation }) => {
               //onPress, navigate and passing props item with the info of each card
               onPress={() =>
                 navigation.navigate("RestaurantDetail", {
-                  restaurantProps: item,
+                  restaurant: item,
                 })
               }
             >

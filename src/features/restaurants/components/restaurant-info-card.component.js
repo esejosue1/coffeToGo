@@ -30,7 +30,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     address = "100 some address stree",
     isOpenNow = true,
     rating = 4,
-    isCloseTemporarily = true,
+    isClosedTemporarily = true,
     placeId,
   } = restaurant;
 
@@ -57,7 +57,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
             ))}
           </Rating>
           <SectionEnd>
-            {isCloseTemporarily && (
+            {isClosedTemporarily && (
               <Text variant="error">CLOSED TEMPORARILY</Text>
             )}
             <Spacer position="left" size="large">

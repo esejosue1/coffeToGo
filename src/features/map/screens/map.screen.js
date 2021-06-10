@@ -37,24 +37,24 @@ export const MapScreen = ({ navigation }) => {
           longitudeDelta: 0.02,
         }}
       >
-        {restaurants.map((eachRestaurant) => {
+        {restaurants.map((restaurant) => {
           return (
             <MapView.Marker
-              key={eachRestaurant.name}
-              title={eachRestaurant.name}
+              key={restaurant.name}
+              title={restaurant.name}
               coordinate={{
-                latitude: eachRestaurant.geometry.location.lat,
-                longitude: eachRestaurant.geometry.location.lng,
+                latitude: restaurant.geometry.location.lat,
+                longitude: restaurant.geometry.location.lng,
               }}
             >
               <MapView.Callout
                 onPress={() =>
                   navigation.navigate("RestaurantDetail", {
-                    eachRestaurant,
+                    restaurant,
                   })
                 }
               >
-                <MapCallout restaurant={eachRestaurant} />
+                <MapCallout restaurant={restaurant} />
               </MapView.Callout>
             </MapView.Marker>
           );
