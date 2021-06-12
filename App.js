@@ -2,7 +2,8 @@ import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React, { useState, useEffect, useCallback } from "react";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/insfrastructure/theme";
-import firebase from "firebase/app";
+import * as firebase from "firebase";
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 import {
   useFonts as useOswald,
   Oswald_400Regular,
@@ -24,27 +25,7 @@ const firebaseConfig = {
   appId: "1:699154149080:web:e2df2dabc3d077c05bb1ad",
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
-
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  useEffect(() => {
-    setTimerOut(() => {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword("email@email.com", "password")
-        .then((user) => {
-          console.log(user);
-          setIsAuthenticated(true);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }, 2000);
-  }, []);
-
   let [oswaldLoaded] = useOswald({
     Oswald_400Regular,
   });
@@ -56,18 +37,18 @@ export default function App() {
     return null;
   }
 
-  if (!isAuthenticated) return null;
-
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantContextProvider>
-              <Navigation />
-            </RestaurantContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
+        <AuthenticationContextProvider>
+          <FavouritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantContextProvider>
+                <Navigation />
+              </RestaurantContextProvider>
+            </LocationContextProvider>
+          </FavouritesContextProvider>
+        </AuthenticationContextProvider>
       </ThemeProvider>
 
       <ExpoStatusBar style="auto" />
