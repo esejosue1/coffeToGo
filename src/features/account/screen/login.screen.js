@@ -9,6 +9,7 @@ import {
   AccountContainer,
   AuthButton,
   AuthInput,
+  ErrorContainer,
   Title,
 } from "../components/account.styles";
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -45,9 +46,9 @@ export const LoginScreen = ({ navigation }) => {
         </Spacer>
 
         {error && (
-          <Spacer size="large">
+          <ErrorContainer size="large">
             <Text variant="error">{error}</Text>
-          </Spacer>
+          </ErrorContainer>
         )}
         <Spacer size="large">
           {!isLoading ? (

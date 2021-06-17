@@ -1,6 +1,6 @@
+import * as firebase from "firebase";
 import React, { useState, createContext } from "react";
 import { loginRequest } from "./authenticatoin.service";
-import * as firebase from "firebase";
 
 export const AuthenticationContext = createContext();
 

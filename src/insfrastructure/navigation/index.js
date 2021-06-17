@@ -3,7 +3,6 @@
 import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { AppNavigator } from "../navigation/app.navigator";
-import { View, Text } from "react-native";
 import { AuthenticationContext } from "../../services/authentication/authentication.context";
 import { AccountNavigator } from "./account.navigator";
 
