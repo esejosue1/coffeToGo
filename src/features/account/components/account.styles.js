@@ -1,12 +1,11 @@
-import React from "react";
 import styled from "styled-components/native";
 import { colors } from "../../../insfrastructure/theme/colors";
 import { Button, TextInput } from "react-native-paper";
-import { Text } from "react-native";
+import { Text, ImageBackground } from "react-native";
 
 //hardcoded props which is the source img
 export const AccountBackground = styled.ImageBackground.attrs({
-  soruce: require("../../../../assets/coffeeHome.jpg"),
+  soruce: require("../../../../assets/home_bg.jpg"),
 })`
   flex: 1;
   align-items: center;
@@ -48,4 +47,12 @@ export const ErrorContainer = styled.View`
   align-self: center;
   margin-top: ${(props) => props.theme.space[2]};
   margin-bottom: ${(props) => props.theme.space[2]};
+`;
+
+export const AnimationWrapper = styled.View`
+  width: 100%;
+  height: 40%;
+  position: absolute;
+  top: 30px;
+  padding: ${(props) => props.theme.space[2]};
 `;

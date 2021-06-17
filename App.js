@@ -8,11 +8,9 @@ import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
-import { LocationContextProvider } from "./src/services/location/location.context";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { Navigation } from "./src/insfrastructure/navigation/index";
-import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
-import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
+
 // const isAndroid = Platform.OS === 'android';
 
 // Initialize Firebase
@@ -45,13 +43,9 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <FavouritesContextProvider>
-            <LocationContextProvider>
-              <RestaurantContextProvider>
+
                 <Navigation />
-              </RestaurantContextProvider>
-            </LocationContextProvider>
-          </FavouritesContextProvider>
+
         </AuthenticationContextProvider>
       </ThemeProvider>
 
